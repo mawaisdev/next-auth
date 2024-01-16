@@ -48,11 +48,11 @@ export const LoginForm = () => {
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     setSuccess('')
     setError('')
-    startTransition(async (): Promise<void> => {
-      const data = await login(values)
-      if (data?.error) setError(error)
-      // Add when we add 2FA
-      // if (success) setSuccess(success)
+    startTransition(() => {
+      login(values).then((data) => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
     })
   }
 
