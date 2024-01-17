@@ -32,7 +32,6 @@ export const NewVerificationForm = () => {
       .catch(() => {
         setError('Something went wrong!')
       })
-    console.log({ token })
   }, [token, success, error])
 
   useEffect(() => {
