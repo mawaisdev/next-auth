@@ -12,7 +12,7 @@ export const generatePasswordResetToken = async (email: string) => {
   if (existingToken) {
     await db.passwordReset.delete({ where: { id: existingToken.id } })
   }
-  const passwordResetToken = await db.verificationToken.create({
+  const passwordResetToken = await db.passwordReset.create({
     data: {
       token,
       expires,
