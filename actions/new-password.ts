@@ -32,7 +32,7 @@ export const newPassword = async (
     data: { password: hashedPassword },
   })
 
-  await db.passwordReset.delete({ where: { id: existingToken.id } })
+  await db.passwordResetToken.delete({ where: { id: existingToken.id } })
 
   return { success: 'Password reset successfully!' }
 }
