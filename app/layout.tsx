@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { SessionProvider } from 'next-auth/react'
+import { auth } from '@/auth'
+
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -9,14 +12,17 @@ export const metadata: Metadata = {
   description: 'Diving into the Next',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await auth()
   return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang='en'>
+        <body className={inter.className}>{children}</body>
+      </html>
+    </SessionProvider>
   )
 }
