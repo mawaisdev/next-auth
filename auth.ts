@@ -55,6 +55,9 @@ export const {
       if (session.user && token.role) {
         session.user.role = token.role as UserRole
       }
+      if (session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
+      }
       return session
     },
 
@@ -63,6 +66,7 @@ export const {
 
       const existingUser = await getUserById(token.sub)
       if (!existingUser) return token
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
       token.role = existingUser.role
       return token
     },
