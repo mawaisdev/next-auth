@@ -4,12 +4,13 @@ import { RoleGate } from '@/components/auth/role-gate'
 import { FormSuccess } from '@/components/form-success'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { toast } from 'sonner'
 
 const AdminPage = () => {
   const onAPIRouteClick = () => {
     fetch('/api/admin').then((response) => {
-      if (response.ok) console.log('OKAY')
-      else console.error('FORBIDDEN')
+      if (response.ok) toast.success('Allowed API Route')
+      else toast.error('Forbidden API Route')
     })
   }
   return (
