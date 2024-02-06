@@ -1,5 +1,6 @@
 'use client'
 
+import { admin } from '@/actions/admin'
 import { RoleGate } from '@/components/auth/role-gate'
 import { FormSuccess } from '@/components/form-success'
 import { Button } from '@/components/ui/button'
@@ -7,7 +8,14 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { toast } from 'sonner'
 
 const AdminPage = () => {
-  const onAPIRouteClick = () => {
+  const onServerActionClick = () => {
+    admin().then((response) => {
+      if (response.success) toast.success('Allowed Server Action')
+      else toast.error('Forbidden Server Action')
+    })
+  }
+
+  const onApiRouteClick = () => {
     fetch('/api/admin').then((response) => {
       if (response.ok) toast.success('Allowed API Route')
       else toast.error('Forbidden API Route')
@@ -24,11 +32,11 @@ const AdminPage = () => {
         </RoleGate>
         <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-md'>
           <p className='text-sm font-medium'>Admin-only API Route</p>
-          <Button onClick={onAPIRouteClick}>Click to test!</Button>
+          <Button onClick={onApiRouteClick}>Click to test!</Button>
         </div>
         <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-md'>
           <p className='text-sm font-medium'>Admin-only Server Action</p>
-          <Button>Click to test!</Button>
+          <Button onClick={onServerActionClick}>Click to test!</Button>
         </div>
       </CardContent>
     </Card>
