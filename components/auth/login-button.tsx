@@ -7,6 +7,9 @@ interface LoginButtonProps {
   asChild?: boolean
 }
 
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { LoginForm } from '@/components/auth/login-form'
+
 export const LoginButton = ({
   children,
   mode = 'redirect',
@@ -19,7 +22,14 @@ export const LoginButton = ({
   }
 
   if (mode == 'model') {
-    return <span>Todo: Implement Modal</span>
+    return (
+      <Dialog>
+        <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
+        <DialogContent className='p-0 w-auto bg-transparent border-none'>
+          <LoginForm />
+        </DialogContent>
+      </Dialog>
+    )
   }
   return (
     <span onClick={onClick} className='cursor-pointer'>

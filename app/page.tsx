@@ -20,7 +20,7 @@ export default function Home() {
           🔒 Auth
         </h1>
         <p className='text-white text-lg'>A Simple Authentication Service</p>
-        <LoginButton>
+        <LoginButton mode='model' asChild>
           <Button variant='secondary' size='lg'>
             Sign In
           </Button>
